@@ -2,6 +2,14 @@
 
 use CodeIgniter\Router\RouteCollection;
 
+$routes->get('/register', 'AuthController::registerView');
+$routes->post('/register', 'AuthController::register');
+
+$routes->get('/login', 'AuthController::loginView');
+$routes->post('/login', 'AuthController::login');
+
+$routes->get('/logout', 'AuthController::logout');
+
 $routes->get('/peminjaman', 'PeminjamanController::index');
 $routes->get('/tampil-buku', 'BukuController::index');
 $routes->get('/tambah-peminjaman', 'PeminjamanController::formTambah');
@@ -10,6 +18,8 @@ $routes->get('/tambah-peminjaman', 'PeminjamanController::formTambah');
 $routes->get('/hapus-peminjaman/(:any)', 'PeminjamanController::hapus/$1');
 $routes->get('/edit_peminjaman/(:any)', 'PeminjamanController::edit/$1');
 $routes->post('/update-peminjaman/(:any)', 'PeminjamanController::updateData/$1');
+
+$routes->get('/history-peminjaman', 'HistoryPeminjamanController::index');
 
 $routes->get('buku', 'BukuController::index');
 $routes->get('tambahBuku', 'BukuController::create');
@@ -38,5 +48,3 @@ $routes->post('simpan-penerbit', 'PenerbitController::store');
 $routes->get('editPenerbit/(:any)', 'PenerbitController::edit/$1');
 $routes->post('update-penerbit/(:any)', 'PenerbitController::update/$1');
 $routes->get('hapus-penerbit/(:any)', 'PenerbitController::delete/$1');
-
-

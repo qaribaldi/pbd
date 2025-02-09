@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body class="p-8 bg-amber-50 font-sans">
-    <div class="max-w-5xl mx-auto bg-white p-8 rounded-lg shadow-lg border border-gray-300">
+    <?php if (session()->getFlashdata('login_berhasil')): ?>
+        <script>
+            alert("<?= session()->getFlashdata('login_berhasil'); ?>");
+        </script>
+    <?php endif; ?>
+    <div class=" mx-auto bg-white p-8 rounded-lg shadow-lg border border-gray-300">
         <h1 class="text-3xl font-bold mb-6 text-emerald-900 text-center"><i class="fas fa-book"></i> Data Peminjaman Buku</h1>
-        
+
+
         <div class="flex justify-center space-x-4 mb-6">
             <a href="<?= base_url('tambah-peminjaman') ?>" class="bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-800 transition">
                 <i class="fas fa-plus"></i> Tambah Peminjaman
+            </a>
+            <a href="<?= base_url('tambah-peminjaman') ?>" class="bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition">
+                <i class="fas fa-book"></i> History Peminjaman
             </a>
             <a href="<?= base_url('tampil-buku') ?>" class="bg-teal-700 text-white px-4 py-2 rounded-lg hover:bg-teal-800 transition">
                 <i class="fas fa-book"></i> Lihat Buku
@@ -24,11 +35,14 @@
             <a href="<?= base_url('tampil_pengarang') ?>" class="bg-orange-700 text-white px-4 py-2 rounded-lg hover:bg-orange-800 transition">
                 <i class="fas fa-pen"></i> Pengarang
             </a>
-            <a href="<?= base_url('tampil_penerbit') ?>" class="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 transition">
+            <a href="<?= base_url('tampil_penerbit') ?>" class="bg-cyan-700 text-white px-4 py-2 rounded-lg hover:bg-cyan-800 transition">
                 <i class="fas fa-building"></i> Penerbit
             </a>
+            <a href="<?= base_url('logout') ?>" class="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 transition">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
         </div>
-        
+
         <table class="w-full border border-gray-300 rounded-lg overflow-hidden shadow-md">
             <thead>
                 <tr class="bg-emerald-900 text-white">
@@ -43,10 +57,11 @@
                 </tr>
             </thead>
             <tbody>
+
                 <?php foreach ($buku as $row) : ?>
                     <tr class="bg-white hover:bg-amber-100 transition">
                         <td class="border px-4 py-3 text-center text-gray-800 font-medium">
-                            <?= esc($row['NO_pinjam']) ?>
+                            <?= esc($row['No_pinjam']) ?>
                         </td>
                         <td class="border px-4 py-3 text-center text-gray-800 font-medium">
                             <?= esc($row['NIM']) ?>
@@ -64,16 +79,16 @@
                             <?= esc($row['Tanggal_Kembali']) ?>
                         </td>
                         <td class="border px-4 py-3 text-center text-gray-800 font-medium">
-                            <?= esc($row['Id_admin']) ?>
+                            <?= esc($row['id_admin']) ?>
                         </td>
                         <td class="border px-4 py-3 text-center flex justify-center space-x-2">
-                            <a href="<?= base_url('edit_peminjaman/' . esc($row['NO_pinjam'])) ?>" 
-                               class="bg-yellow-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-yellow-700 transition">
+                            <a href="<?= base_url('edit_peminjaman/' . esc($row['No_pinjam'])) ?>"
+                                class="bg-yellow-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-yellow-700 transition">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
-                            <a href="<?= base_url('hapus-peminjaman/' . $row['NO_pinjam']) ?>" 
-                               onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
-                               class="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition">
+                            <a href="<?= base_url('hapus-peminjaman/' . $row['No_pinjam']) ?>"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                class="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition">
                                 <i class="fas fa-trash"></i> Hapus
                             </a>
                         </td>
@@ -83,4 +98,5 @@
         </table>
     </div>
 </body>
+
 </html>
